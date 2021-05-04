@@ -222,7 +222,7 @@ export class AppComponent {
         event: { event: 'Start' },
       },
       ports: [{
-        id: 'port1',
+        id: 'portStart',
         offset: {
           x: 0,
           y: 0
@@ -236,23 +236,50 @@ export class AppComponent {
         type: 'Bpmn', shape: 'Event',
         event: { event: 'NonInterruptingIntermediate' }
       },
+      ports: [{
+        id: 'portNonInterruptingIntermediate',
+        offset: {
+          x: 0,
+          y: 0
+        },
+        visibility: PortVisibility.Visible,
+        constraints: PortConstraints.Draw
+      }]
     },
     {
       id: 'End', width: 35, height: 35, offsetX: 665, offsetY: 230, shape: {
         type: 'Bpmn', shape: 'Event',
         event: { event: 'End' }
       },
+      ports: [{
+        id: 'portEnd',
+        offset: {
+          x: 0,
+          y: 0
+        },
+        visibility: PortVisibility.Visible,
+        constraints: PortConstraints.Draw
+      }]
     },
     {
-      id: 'Task', width: 35, height: 35, offsetX: 700, offsetY: 700,
+      id: 'Task', width: 85, height: 55, offsetX: 700, offsetY: 700,
       shape: {
         type: 'Bpmn', shape: 'Activity', activity: {
           activity: 'Task',
         },
-      }
+      },
+      ports: [{
+        id: 'portTask',
+        offset: {
+          x: 0,
+          y: 0
+        },
+        visibility: PortVisibility.Visible,
+        constraints: PortConstraints.Draw
+      }]
     },
     {
-      id: 'Transaction', width: 35, height: 35, offsetX: 300, offsetY: 100,
+      id: 'Transaction', width: 85, height: 55, offsetX: 300, offsetY: 100,
       constraints: NodeConstraints.Default | NodeConstraints.AllowDrop,
       shape: {
         type: 'Bpmn', shape: 'Activity',
@@ -263,22 +290,58 @@ export class AppComponent {
             }
           }
         }
-      }
+      },
+      ports: [{
+        id: 'portTransaction',
+        offset: {
+          x: 0,
+          y: 0
+        },
+        visibility: PortVisibility.Visible,
+        constraints: PortConstraints.Draw
+      }]
     }, {
-      id: 'Task_Service', width: 35, height: 35, offsetX: 700, offsetY: 700,
+      id: 'Task_Service', width: 85, height: 55, offsetX: 700, offsetY: 700,
       shape: {
         type: 'Bpmn', shape: 'Activity', activity: {
           activity: 'Task', task: { type: 'Service' }
         },
-      }
+      },
+      ports: [{
+        id: 'portTaskService',
+        offset: {
+          x: 0,
+          y: 0
+        },
+        visibility: PortVisibility.Visible,
+        constraints: PortConstraints.Draw
+      }]
     },
     {
       id: 'Gateway', width: 35, height: 35, offsetX: 100, offsetY: 100,
-      shape: { type: 'Bpmn', shape: 'Gateway', gateway: { type: 'Exclusive' } as BpmnGatewayModel }
+      shape: { type: 'Bpmn', shape: 'Gateway', gateway: { type: 'Exclusive' } as BpmnGatewayModel },
+      ports: [{
+        id: 'portGateway',
+        offset: {
+          x: 0,
+          y: 0
+        },
+        visibility: PortVisibility.Visible,
+        constraints: PortConstraints.Draw
+      }]
     },
     {
       id: 'DataObject', width: 35, height: 35, offsetX: 500, offsetY: 100,
-      shape: { type: 'Bpmn', shape: 'DataObject', dataObject: { collection: false, type: 'None' } }
+      shape: { type: 'Bpmn', shape: 'DataObject', dataObject: { collection: false, type: 'None' } },
+      ports: [{
+        id: 'portDataObject',
+        offset: {
+          x: 0,
+          y: 0
+        },
+        visibility: PortVisibility.Visible,
+        constraints: PortConstraints.Draw
+      }]
     },
     {
       id: 'subProcess', width: 520, height: 250, offsetX: 355, offsetY: 230,
@@ -294,6 +357,15 @@ export class AppComponent {
           }
         }
       },
+      ports: [{
+        id: 'portSubProcess',
+        offset: {
+          x: 0,
+          y: 0
+        },
+        visibility: PortVisibility.Visible,
+        constraints: PortConstraints.Draw
+      }]
     },
   ];
   public contextMenu: ContextMenuSettingsModel = {
@@ -477,35 +549,6 @@ export class AppComponent {
 
   }
 
-  public getConnectors(): ConnectorModel[] {
-
-    let connectorSymbols: ConnectorModel[] = [
-      {
-        id: 'Link1', type: 'Orthogonal', sourcePoint: { x: 0, y: 0 }, targetPoint: { x: 40, y: 40 },
-        targetDecorator: { shape: 'Arrow', style: {strokeColor: '#757575', fill: '#757575'} }, style: { strokeWidth: 2, strokeColor: '#757575' }
-      },
-      {
-        id: 'Link2', type: 'Orthogonal', sourcePoint: { x: 0, y: 0 }, targetPoint: { x: 40, y: 40 },
-        targetDecorator: { shape: 'Arrow', style: {strokeColor: '#757575', fill: '#757575'} }, style: { strokeWidth: 2, strokeDashArray: '4 4', strokeColor: '#757575' }
-      },
-      {
-        id: 'Link3', type: 'Straight', sourcePoint: { x: 0, y: 0 }, targetPoint: { x: 40, y: 40 },
-        targetDecorator: { shape: 'Arrow', style: {strokeColor: '#757575', fill: '#757575'} }, style: { strokeWidth: 2, strokeColor: '#757575' }
-      },
-      {
-        id: 'link4', sourcePoint: { x: 0, y: 0 }, targetPoint: { x: 40, y: 40 }, type: 'Orthogonal',
-        targetDecorator: { style: {strokeColor: '#757575', fill: '#757575'} },
-        shape: {
-          type: 'Bpmn',
-          flow: 'Association',
-          association: 'Directional'
-        }, style: {
-          strokeDashArray: '2,2', strokeColor: '#757575'
-        },
-      },
-    ];
-    return connectorSymbols;
-  }
   public contextMenuOpen(args: DiagramBeforeMenuOpenEventArgs) {
     console.log(args);
     let hiddenId: string[] = [];
@@ -641,7 +684,7 @@ export class AppComponent {
 
   public palette: PaletteModel[] = [
     { id: 'Bpmn', expanded: true, symbols: this.bpmnShapes, iconCss: 'shapes', title: 'BPMN Shapes' },
-    { id: 'Connector', expanded: true, symbols: this.getConnectors(), iconCss: 'shapes', title: 'Connectors' },
+    //{ id: 'Connector', expanded: true, symbols: this.getConnectors(), iconCss: 'shapes', title: 'Connectors' },
   ];
 }
 
