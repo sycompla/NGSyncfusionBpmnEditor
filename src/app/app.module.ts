@@ -4,7 +4,7 @@ import { AccumulationChartModule } from '@syncfusion/ej2-angular-charts';
 
 import { AccumulationAnnotationService, AccumulationDataLabelService, AccumulationLegendService, AccumulationTooltipService, ChartAllModule } from '@syncfusion/ej2-angular-charts';
 
-import { DiagramAllModule, SymbolPaletteAllModule, OverviewAllModule } from '@syncfusion/ej2-angular-diagrams';
+import { DiagramAllModule, SymbolPaletteAllModule, OverviewAllModule, PortConstraints} from '@syncfusion/ej2-angular-diagrams';
 
 import { GridAllModule } from '@syncfusion/ej2-angular-grids';
 

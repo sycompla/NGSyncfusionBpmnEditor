@@ -1,13 +1,35 @@
-import { Component, ViewEncapsulation, ViewChild ,Inject} from '@angular/core';
+import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
 import {
-  DiagramComponent, MarginModel, Diagram, NodeModel, BpmnDiagrams, SnapSettingsModel, BpmnLoops, SnapConstraints, SymbolPalette,
-  BpmnShape, BpmnDataObjects, BpmnGateways, BpmnTasks, BpmnTriggers,
-  BpmnBoundary, NodeConstraints, BpmnShapeModel, ConnectorModel,
-  BpmnGatewayModel, ContextMenuSettingsModel, IDragEnterEventArgs, DiagramBeforeMenuOpenEventArgs,
-  BpmnEvents, PaletteModel
+  BpmnBoundary,
+  BpmnDataObjects,
+  BpmnDiagrams,
+  BpmnEvents,
+  BpmnGatewayModel,
+  BpmnGateways,
+  BpmnLoops,
+  BpmnShape,
+  BpmnShapeModel,
+  BpmnTasks,
+  BpmnTriggers,
+  ConnectorModel,
+  ContextMenuSettingsModel,
+  Diagram,
+  DiagramBeforeMenuOpenEventArgs,
+  DiagramComponent,
+  IDragEnterEventArgs,
+  MarginModel,
+  NodeConstraints,
+  NodeModel,
+  PaletteModel,
+  PortConstraints,
+  PortVisibility,
+  SnapConstraints,
+  SnapSettingsModel,
+  SymbolPalette
 } from '@syncfusion/ej2-angular-diagrams';
-import { MenuEventArgs, ExpandMode } from '@syncfusion/ej2-navigations';
-import { paletteIconClick } from '../script/diagram-common';
+import {ExpandMode, MenuEventArgs} from '@syncfusion/ej2-navigations';
+import {paletteIconClick} from '../script/diagram-common';
+
 SymbolPalette.Inject(BpmnDiagrams);
 Diagram.Inject(BpmnDiagrams);
 
@@ -30,8 +52,17 @@ export class AppComponent {
     {
       id: 'start', width: 40, height: 40, offsetX: 35, offsetY: 180, shape: {
         type: 'Bpmn', shape: 'Event',
-        event: { event: 'Start' }
-      }
+        event: { event: 'Start' },
+      },
+      ports: [{
+        id: 'port1',
+        offset: {
+          x: 0,
+          y: 0
+        },
+        visibility: PortVisibility.Visible,
+        constraints: PortConstraints.Drag
+      }]
     },
     {
       id: 'subProcess', width: 520, height: 250, offsetX: 355, offsetY: 180,
@@ -190,6 +221,15 @@ export class AppComponent {
         type: 'Bpmn', shape: 'Event',
         event: { event: 'Start' },
       },
+      ports: [{
+        id: 'port1',
+        offset: {
+          x: 0,
+          y: 0
+        },
+        visibility: PortVisibility.Visible,
+        constraints: PortConstraints.Draw
+      }]
     },
     {
       id: 'NonInterruptingIntermediate', width: 35, height: 35, shape: {
