@@ -48,7 +48,7 @@ export class AppComponent {
   constructor() {
 
   }
-  public nodes: NodeModel[] = [
+  public nodes: NodeModel[] = [/*
     {
       id: 'start', width: 40, height: 40, offsetX: 35, offsetY: 180, shape: {
         type: 'Bpmn', shape: 'Event',
@@ -173,10 +173,10 @@ export class AppComponent {
         event: { event: 'End' }
       }, margin: { left: 440, top: 210 }
     },
-  ];
+  */];
   public snapSettings: SnapSettingsModel = { constraints: SnapConstraints.None };
 
-  public connectors: ConnectorModel[] = [
+  public connectors: ConnectorModel[] = [/*
     { id: 'connector1', sourceID: 'start', targetID: 'subProcess' },
     { id: 'connector2', sourceID: 'subProcess', sourcePortID: 'success', targetID: 'end' },
     {
@@ -214,7 +214,7 @@ export class AppComponent {
       }],
       segments: [{ type: 'Orthogonal', length: 50, direction: 'Bottom' }]
     }
-  ];
+  */];
   public bpmnShapes: NodeModel[] = [
     {
       id: 'Start', width: 35, height: 35, shape: {
