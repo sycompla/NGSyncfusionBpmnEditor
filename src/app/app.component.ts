@@ -359,6 +359,7 @@ export class AppComponent {
     left: 15, right: 15, top: 15, bottom: 15
   };
   public contextMenuClick(args: MenuEventArgs): void {
+    console.log(args);
     if (this.diagram.selectedItems.nodes.length > 0) {
       let bpmnShape: BpmnShapeModel = this.diagram.selectedItems.nodes[0].shape as BpmnShapeModel;
       if (args.item.iconCss.indexOf('e-adhocs') > -1) {
@@ -466,6 +467,7 @@ export class AppComponent {
     return connectorSymbols;
   }
   public contextMenuOpen(args: DiagramBeforeMenuOpenEventArgs) {
+    console.log(args);
     let hiddenId: string[] = [];
     if (args.element.className !== 'e-menu-parent e-ul ') {
       hiddenId = ['Adhoc', 'Loop', 'taskCompensation', 'Activity-Type', 'Boundry', 'DataObject',
