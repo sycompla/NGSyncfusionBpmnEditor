@@ -29,6 +29,9 @@ import {
 } from '@syncfusion/ej2-angular-diagrams';
 import {ExpandMode, MenuEventArgs} from '@syncfusion/ej2-navigations';
 import {paletteIconClick} from '../script/diagram-common';
+import * as Enumerable from "linq";
+import * as nodeArrayData from "../jsonArrays/osszetettebbPeldaGatewayNodeArray.json";
+import * as connectionArrayData from "../jsonArrays/osszetettebbPeldaGatewayConnectorArray.json";
 
 SymbolPalette.Inject(BpmnDiagrams);
 Diagram.Inject(BpmnDiagrams);
@@ -48,12 +51,163 @@ export class AppComponent {
   constructor() {
 
   }
-  public nodes: NodeModel[] = [/*
+
+  /*public nodes: NodeModel[] = [
+    {
+      id: 'start', width: 40, height: 40, offsetX: 50, offsetY: 180, shape: {
+        type: 'Bpmn', shape: 'Event',
+        event: {event: 'Start'},
+      }
+    },
+    {
+      id: 'gateway', width:40, height:40, offsetX:150, offsetY:180, shape: {
+        type: 'Bpmn', shape: 'Gateway',
+        gateway: {
+          type: "Exclusive"
+        }
+      }
+    },
+    {
+      id: 'gateway1', width:40, height:40, offsetX:250, offsetY:180, shape: {
+        type: 'Bpmn', shape: 'Gateway',
+        gateway: {
+          type: "Exclusive"
+        }
+      }
+    },
+    {
+      id: 'activity', width:80, height:50, offsetY:80, offsetX:350,
+      annotations: [
+        {
+          content: 'process'
+        }
+      ],
+      shape: {
+        type: 'Bpmn', shape: 'Activity',
+        activity: {
+          activity: 'SubProcess',
+          subProcess: {
+            boundary: "Call"
+          }
+        }
+      }
+    },
+    {
+      id: 'activity1', width:80, height:50, offsetY:180, offsetX:350,
+      annotations: [
+        {
+          content: 'process1'
+        }
+      ],
+      shape: {
+        type: 'Bpmn', shape: 'Activity',
+        activity: {
+          activity: 'SubProcess',
+          subProcess: {
+            boundary: "Call"
+          }
+        }
+      }
+    },
+    {
+      id: 'activity2', width:80, height:50, offsetY:280, offsetX:350,
+      annotations: [
+        {
+          content: 'process2'
+        }
+      ],
+      shape: {
+        type: 'Bpmn', shape: 'Activity',
+        activity: {
+          activity: 'SubProcess',
+          subProcess: {
+            boundary: "Call"
+          }
+        }
+      }
+    },
+    {
+      id: 'activity3', width:80, height:50, offsetY:380, offsetX:350,
+      annotations: [
+        {
+          content: 'process3'
+        }
+      ],
+      shape: {
+        type: 'Bpmn', shape: 'Activity',
+        activity: {
+          activity: 'SubProcess',
+          subProcess: {
+            boundary: "Call"
+          }
+        }
+      }
+    },
+    {
+      id: 'gateway2', width:40, height:40, offsetX:450, offsetY:180, shape: {
+        type: 'Bpmn', shape: 'Gateway',
+        gateway: {
+          type: "Exclusive"
+        }
+      }
+    },
+    {
+      id: 'activityService', width:80, height:120, offsetY:180, offsetX:550,
+      annotations: [
+        {
+          content: 'Decide what to do next'
+        }
+      ],
+      shape: {
+        type: 'Bpmn', shape: 'Activity',
+        activity: {
+          activity: 'Task',
+          task: {
+            type: "Service"
+          }
+        }
+      }
+    },
+    {
+      id: 'gateway3', width:40, height:40, offsetX:650, offsetY:180,
+      annotations: [
+        {
+          content: "End process?"
+        }
+      ],
+      shape: {
+        type: 'Bpmn', shape: 'Gateway',
+        gateway: {
+          type: "Exclusive"
+        }
+      }
+    },
+    {
+      id: 'end', width: 40, height: 40, offsetX: 750, offsetY: 180, shape: {
+        type: 'Bpmn', shape: 'Event',
+        event: {event: 'End'},
+      }
+    },
+    /*
+    {
+      id: 'service', width: 95, height: 70,
+      shape: {
+        type: 'Bpmn', shape: 'Activity'
+      }
+    },
+    {
+      id: 'service1', width: 95, height: 70, offsetX: 150,
+      shape: {
+        type: 'Bpmn', shape: 'Activity'
+      }
+    }
+
     {
       id: 'start', width: 40, height: 40, offsetX: 35, offsetY: 180, shape: {
         type: 'Bpmn', shape: 'Event',
-        event: { event: 'Start' },
+        event: {event: 'Start'},
       },
+
       ports: [{
         id: 'port1',
         offset: {
@@ -173,10 +327,30 @@ export class AppComponent {
         event: { event: 'End' }
       }, margin: { left: 440, top: 210 }
     },
-  */];
+  ];*/
+
+  public nodeArray: string = JSON.stringify((<any>nodeArrayData).default);
+  public connectionArray: string = JSON.stringify((<any>connectionArrayData).default);
+
+  public nodes: NodeModel[] = JSON.parse(this.nodeArray);
   public snapSettings: SnapSettingsModel = { constraints: SnapConstraints.None };
 
-  public connectors: ConnectorModel[] = [/*
+  /*public connectors: ConnectorModel[] = [
+    { id: 'connector', sourceID: 'start', targetID: 'gateway'},
+    { id: 'connector1', sourceID: 'gateway', targetID: 'gateway1'},
+    { id: 'connector2', sourceID: 'gateway1', targetID: 'activity', type: "Orthogonal"},
+    { id: 'connector3', sourceID: 'gateway1', targetID: 'activity1', type: "Orthogonal"},
+    { id: 'connector4', sourceID: 'gateway1', targetID: 'activity2', type: "Orthogonal"},
+    { id: 'connector5', sourceID: 'gateway1', targetID: 'activity3', type: "Orthogonal"},
+    { id: 'connector6', sourceID: 'activity', targetID: 'gateway2', type: "Orthogonal"},
+    { id: 'connector7', sourceID: 'activity1', targetID: 'gateway2', type: "Orthogonal"},
+    { id: 'connector8', sourceID: 'activity2', targetID: 'gateway2', type: "Orthogonal"},
+    { id: 'connector9', sourceID: 'activity3', targetID: 'gateway2', type: "Orthogonal"},
+    { id: 'connector10', sourceID: 'gateway2', targetID: 'activityService', type: "Orthogonal"},
+    { id: 'connector11', sourceID: 'activityService', targetID: 'gateway3', type: "Orthogonal"},
+    { id: 'connector12', sourceID: 'gateway3', targetID: 'gateway', type: "Orthogonal", annotations: [{content: 'No'}]},
+    { id: 'connector13', sourceID: 'gateway3', targetID: 'end', type: "Orthogonal", annotations: [{content: 'Yes'}]},
+    /*
     { id: 'connector1', sourceID: 'start', targetID: 'subProcess' },
     { id: 'connector2', sourceID: 'subProcess', sourcePortID: 'success', targetID: 'end' },
     {
@@ -214,7 +388,8 @@ export class AppComponent {
       }],
       segments: [{ type: 'Orthogonal', length: 50, direction: 'Bottom' }]
     }
-  */];
+  ];*/
+  public connectors: ConnectorModel[] = JSON.parse(this.connectionArray);
   public bpmnShapes: NodeModel[] = [
     {
       id: 'Start', width: 35, height: 35, shape: {
@@ -681,6 +856,22 @@ export class AppComponent {
   public getSymbolDefaults(symbol: NodeModel): void {
     symbol.style.strokeColor = '#757575';
   }
+
+  public linqTest() {
+
+    console.log(this.nodeArray);
+    console.log(JSON.stringify(this.connectors));
+/*
+    Enumerable.from(nodeArray)
+      .select(function (node) {
+
+        let choosen = node;
+
+        console.log(choosen.height);
+
+      })
+*/
+  } // linqTest
 
   public palette: PaletteModel[] = [
     { id: 'Bpmn', expanded: true, symbols: this.bpmnShapes, iconCss: 'shapes', title: 'BPMN Shapes' },

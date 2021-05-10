@@ -32,8 +32,10 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import {NgxFsModule} from 'ngx-fs';
+
 import { AppComponent } from './app.component';
 
-@NgModule({ declarations: [ AppComponent ], imports: [ DiagramAllModule, ChartAllModule, GridAllModule, SymbolPaletteAllModule, OverviewAllModule, ButtonModule,       ColorPickerModule,  DateRangePickerModule, CheckBoxModule, AccumulationChartModule, BrowserModule,ToolbarModule, DropDownButtonModule, UploaderModule, CircularGaugeModule, DropDownListAllModule, ListViewAllModule,       DialogAllModule, TextBoxModule, RadioButtonModule,       MultiSelectModule, NumericTextBoxModule, BrowserModule], providers: [], bootstrap: [AppComponent]
+@NgModule({ declarations: [ AppComponent ], imports: [ NgxFsModule, DiagramAllModule, ChartAllModule, GridAllModule, SymbolPaletteAllModule, OverviewAllModule, ButtonModule,       ColorPickerModule,  DateRangePickerModule, CheckBoxModule, AccumulationChartModule, BrowserModule,ToolbarModule, DropDownButtonModule, UploaderModule, CircularGaugeModule, DropDownListAllModule, ListViewAllModule,       DialogAllModule, TextBoxModule, RadioButtonModule,       MultiSelectModule, NumericTextBoxModule, BrowserModule], providers: [], bootstrap: [AppComponent]
 })
 export class AppModule { }
